@@ -1,67 +1,240 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/png" href="/threads.png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#030014" />
-  <meta name="description"
-    content="THREADS'26 — National Level Technical Symposium. A futuristic cyber-symposium experience featuring workshops, hackathons, and tech events." />
-  <title>THREADS'26 </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THREADS 2026 · SONACSE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #0b0f1a 0%, #1a1f2f 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
 
-  <!-- THEME CSS VARIABLES (Permanently Dark) -->
-  <style>
-    :root {
-      --bg-primary: #090011;
-      --bg-secondary: #0f0f13;
-      --bg-card: rgba(255, 255, 255, 0.04);
-      --bg-card-hover: rgba(255, 255, 255, 0.08);
-      /* Increased opacity for less transparency as requested */
-      --bg-nav: rgba(9, 0, 17, 0.95);
-      --bg-drawer: #090011;
-      --bg-input: rgba(0, 0, 0, 0.40);
-      --bg-bottom-nav: rgba(9, 0, 17, 0.95);
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            padding: 50px 40px;
+            text-align: center;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
 
-      --text-primary: #ffffff;
-      --text-secondary: #a1a1aa;
-      --text-muted: #52525b;
+        .badge {
+            display: inline-block;
+            background: rgba(138, 46, 255, 0.2);
+            border: 1px solid #8a2eff;
+            color: #e6b8ff;
+            padding: 8px 24px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+        }
 
-      --border-normal: rgba(255, 255, 255, 0.10);
-      --border-dashed: rgba(255, 255, 255, 0.20);
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #00f0ff, #8a2eff, #ff2ed9);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.3);
+        }
 
-      --scrollbar-track: #05010a;
-      --scrollbar-thumb: #00D9FF;
+        h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #ffffff, #00f0ff, #8a2eff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-      --glass-bg: rgba(9, 0, 17, 0.85);
-      --glass-border: rgba(5, 217, 232, 0.20);
+        .subtitle {
+            font-size: 20px;
+            color: #9adfe6;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
 
-      --body-gradient:
-        radial-gradient(circle at 15% 50%, rgba(5, 217, 232, 0.08) 0%, transparent 25%),
-        radial-gradient(circle at 85% 30%, rgba(255, 42, 109, 0.08) 0%, transparent 25%),
-        linear-gradient(to bottom, #090011 0%, #05010a 100%);
+        .sonacse {
+            color: #ff2ed9;
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
 
-      color-scheme: dark;
-    }
+        .status-box {
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid #00f0ff;
+            border-radius: 60px;
+            padding: 20px 30px;
+            margin: 30px 0 20px;
+            display: inline-block;
+        }
 
-    /* Ensure light theme requests also fallback to dark variables since light is removed */
-    [data-theme="light"] {
-      --bg-primary: #090011;
-      --text-primary: #ffffff;
-    }
-  </style>
+        .status-box h2 {
+            color: #00f0ff;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .status-box p {
+            color: #8bdfe6;
+            font-size: 16px;
+        }
+
+        .message {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 40px 0 20px;
+            border: 1px solid rgba(138, 46, 255, 0.3);
+        }
+
+        .message p {
+            color: #c6d9e6;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .date {
+            color: #ff2ed9;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .footer {
+            margin-top: 50px;
+            color: #6fbfd0;
+            font-size: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 25px;
+        }
+
+        .footer span {
+            color: #00f0ff;
+            font-weight: 500;
+        }
+
+        .dots {
+            margin: 30px 0;
+        }
+
+        .dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #00f0ff;
+            border-radius: 50%;
+            margin: 0 5px;
+            opacity: 0.5;
+        }
+
+        .dot:nth-child(2) {
+            background: #8a2eff;
+        }
+
+        .dot:nth-child(3) {
+            background: #ff2ed9;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 36px;
+            }
+            
+            .subtitle {
+                font-size: 16px;
+            }
+            
+            .status-box h2 {
+                font-size: 22px;
+            }
+        }
+    </style>
 </head>
-
 <body>
-  <div id="root"></div>
-  <script type="module" src="/src/main.jsx"></script>
-</body>
+    <div class="container">
+        <!-- Badge -->
+        <div class="badge">
+            🚀 SONACSE · CSE
+        </div>
 
+        <!-- Logo -->
+        <div class="logo">
+            T26
+        </div>
+
+        <!-- Title -->
+        <h1>THREADS 2026</h1>
+        <div class="subtitle">
+            Department of Computer Science & Engineering
+        </div>
+        
+        <!-- SONACSE -->
+        <div class="sonacse">
+            ⚡ SONACSE · Sona College of Technology
+        </div>
+
+        <!-- Status Box -->
+        <div class="status-box">
+            <h2>GET READY TO LAUNCH</h2>
+            <p>under development · coming soon</p>
+        </div>
+
+        <!-- Animated Dots -->
+        <div class="dots">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+
+        <!-- Message Box -->
+        <div class="message">
+            <p>
+                We're working hard to bring you the biggest<br>
+                tech extravaganza of 2026. Stay tuned!
+            </p>
+            <div class="date">
+                March 2026
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2026 <span>SONACSE</span> · All rights reserved</p>
+            <p style="margin-top: 10px; font-size: 13px; color: #4fa3b3;">
+                Sona College of Technology · Salem
+            </p>
+        </div>
+    </div>
+</body>
 </html>
