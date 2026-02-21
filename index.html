@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/threads.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#030014" />
+  <meta name="description"
+    content="THREADS'26 — National Level Technical Symposium. A futuristic cyber-symposium experience featuring workshops, hackathons, and tech events." />
+  <title>THREADS'26 </title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <!-- THEME CSS VARIABLES (Permanently Dark) -->
+  <style>
+    :root {
+      --bg-primary: #090011;
+      --bg-secondary: #0f0f13;
+      --bg-card: rgba(255, 255, 255, 0.04);
+      --bg-card-hover: rgba(255, 255, 255, 0.08);
+      /* Increased opacity for less transparency as requested */
+      --bg-nav: rgba(9, 0, 17, 0.95);
+      --bg-drawer: #090011;
+      --bg-input: rgba(0, 0, 0, 0.40);
+      --bg-bottom-nav: rgba(9, 0, 17, 0.95);
+
+      --text-primary: #ffffff;
+      --text-secondary: #a1a1aa;
+      --text-muted: #52525b;
+
+      --border-normal: rgba(255, 255, 255, 0.10);
+      --border-dashed: rgba(255, 255, 255, 0.20);
+
+      --scrollbar-track: #05010a;
+      --scrollbar-thumb: #00D9FF;
+
+      --glass-bg: rgba(9, 0, 17, 0.85);
+      --glass-border: rgba(5, 217, 232, 0.20);
+
+      --body-gradient:
+        radial-gradient(circle at 15% 50%, rgba(5, 217, 232, 0.08) 0%, transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(255, 42, 109, 0.08) 0%, transparent 25%),
+        linear-gradient(to bottom, #090011 0%, #05010a 100%);
+
+      color-scheme: dark;
+    }
+
+    /* Ensure light theme requests also fallback to dark variables since light is removed */
+    [data-theme="light"] {
+      --bg-primary: #090011;
+      --text-primary: #ffffff;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
+</html>
