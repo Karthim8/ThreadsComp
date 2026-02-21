@@ -17,12 +17,21 @@ const schema = z.object({
     gender: z.enum(["Male", "Female", "Other"], { required_error: "Select gender" }),
     mobile: z.string().regex(/^[0-9]{10}$/, "Invalid mobile number"),
     college: z.string().min(3, "College name required"),
-    department: z.string().min(2, "Department required"),
+    department: z.string().min(1, "Department selection required"),
+    otherDepartment: z.string().optional(),
     year: z.enum(["1", "2", "3", "4"], { required_error: "Select year" }),
     city: z.string().optional(),
     state: z.string().optional(),
     workshop_selections: z.array(z.string()).max(1, "Only one workshop allowed"),
     event_selections: z.array(z.string()).default([])
+}).refine((data) => {
+    if (data.department === "OTHERS" && (!data.otherDepartment || data.otherDepartment.trim() === "")) {
+        return false;
+    }
+    return true;
+}, {
+    message: "Please enter your department name",
+    path: ["otherDepartment"]
 });
 
 const steps = [
@@ -291,7 +300,7 @@ const Register = () => {
                 gender: data.gender,
                 phone: data.mobile,
                 college_name: data.college,
-                department: data.department,
+                department: data.department === 'OTHERS' ? data.otherDepartment : data.department,
                 year_of_study: parseInt(data.year),
                 city: data.city || '',
                 state: data.state || '',
@@ -570,9 +579,28 @@ const Register = () => {
                                     <motion.div key="step2" initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -20, opacity: 0 }} className="space-y-6">
                                         <Input label="College Name" name="college" register={register} error={errors.college} placeholder="Enter your College Name" />
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                            <Input label="Department" name="department" register={register} error={errors.department} placeholder="Enter your Department EX: CSE, ECE, IT" />
-                                            <Select label="Year of Study" name="year" register={register} error={errors.year} options={['1', '2', '3',]} />
+                                            <Select
+                                                label="Department"
+                                                name="department"
+                                                register={register}
+                                                error={errors.department}
+                                                options={['CSE', 'ECE', 'IT', 'EEE', 'CIVIL', 'MECH', 'MCT', 'AIML', 'ADS', 'CSD', 'BME', 'CYBERSECURITY', 'OTHERS']}
+                                            />
+                                            <Select label="Year of Study" name="year" register={register} error={errors.year} options={['1', '2', '3', '4']} />
                                         </div>
+
+                                        {watch('department') === 'OTHERS' && (
+                                            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} className="overflow-hidden">
+                                                <Input
+                                                    label="Specify Department"
+                                                    name="otherDepartment"
+                                                    register={register}
+                                                    error={errors.otherDepartment}
+                                                    placeholder="Enter your department name"
+                                                />
+                                            </motion.div>
+                                        )}
+
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                             <Input label="City (Optional)" name="city" register={register} />
                                             <Input label="State (Optional)" name="state" register={register} />

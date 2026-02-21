@@ -99,7 +99,7 @@ const SECTIONS = [
         color: '#FF2A6D',
         title: 'CAPTURE THE FLAG',
         subtitle: 'CTF – By Byte Busters Club',
-        organizers: ['Subash Chandra Bose S', 'Pranesh K K', 'Tanushree T B', 'Karthikeyan R', 'Macernest Antony D'],
+        organizers: ['Subash Chandra Bose S', 'Pranesh K K', 'Tanushree T B', 'Karthikeyan R', 'Macernestantony D'],
         content: [
             { type: 'rule', n: 1, text: 'Each team must consist of exactly 3 members.' },
             { type: 'rule', n: 2, text: 'Team members can collaborate freely within their team and share knowledge among themselves.' },
