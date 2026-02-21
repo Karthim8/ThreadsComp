@@ -443,13 +443,13 @@ export default function RuleBookPage() {
                         </div>
                     </div>
 
-                   <a
-    href="https://drive.google.com/uc?export=download&id=1hqIwUbG37Vb0rC_wyjUMD2XPUCVJm_oR"
-    target="_blank"
-    class="flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/10 text-white font-bold font-orbitron text-xs rounded-xl hover:bg-white hover:text-black transition-all w-fit"
->
-    DOWNLOAD PDF
-</a>
+                    <a
+                        href="https://drive.google.com/uc?export=download&id=1veFVxL2vCNRCGPHdTz-ugRDBMC-2PL85"
+                        target="_blank"
+                        class="flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/10 text-white font-bold font-orbitron text-xs rounded-xl hover:bg-white hover:text-black transition-all w-fit"
+                    >
+                        DOWNLOAD PDF
+                    </a>
                 </motion.div>
 
                 {/* Progress bar */}
