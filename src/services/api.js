@@ -1,4 +1,4 @@
-const API_BASE = 'https://threads26-2-fdem.onrender.com'; // Production (Render)
+const API_BASE = 'https://threads26-2-fdem.onrender.com/api'; // Production (Render)
 // const API_BASE = 'http://localhost:3000/api'; // Local dev
 
 const delay = (ms) => new Promise(res => setTimeout(res, ms));
@@ -10,7 +10,7 @@ export const fetchAPI = async (endpoint, options = {}, retries = 5) => {
         const response = await fetch(`${API_BASE}${endpoint}`, {
             headers: {
                 'Content-Type': 'application/json',
-                'X-API-KEY': API_KEY,
+                'x-api-key': API_KEY,
                 ...options.headers
             },
             ...options
