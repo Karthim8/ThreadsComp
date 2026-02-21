@@ -37,6 +37,17 @@ export const fetchAPI = async (endpoint, options = {}, retries = 5) => {
 
 export const loadEventDates = () => fetchAPI('/event-dates');
 export const loadEvents = () => fetchAPI('/events');
+
+export const sendOTP = (data) => fetchAPI('/send-otp', {
+    method: 'POST',
+    body: JSON.stringify(data)
+});
+
+export const verifyOTP = (data) => fetchAPI('/verify-otp', {
+    method: 'POST',
+    body: JSON.stringify(data)
+});
+
 export const submitRegistration = (data) => fetchAPI('/register', {
     method: 'POST',
     body: JSON.stringify(data)

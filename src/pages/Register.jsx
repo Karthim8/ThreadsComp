@@ -7,7 +7,7 @@ import * as z from 'zod';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, ChevronRight, ChevronLeft, AlertCircle, Loader2, Calendar, Zap, Shield, Info, User } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { loadEvents, submitRegistration } from '../services/api';
+import { loadEvents, submitRegistration, sendOTP, verifyOTP } from '../services/api';
 import Swal from 'sweetalert2';
 
 // Zod Schema updated - removed accommodation
@@ -39,6 +39,11 @@ const Register = () => {
     const [error, setError] = useState(null);
     const [submitting, setSubmitting] = useState(false);
     const [showForm, setShowForm] = useState(false); // Controls visibility of the main form
+    const [otpSent, setOtpSent] = useState(false);
+    const [verifyingOtp, setVerifyingOtp] = useState(false);
+    const [otpValue, setOtpValue] = useState('');
+    const [verificationToken, setVerificationToken] = useState(null);
+    const [isOtpVerified, setIsOtpVerified] = useState(false);
     const navigate = useNavigate();
 
     const { register, handleSubmit, watch, formState: { errors }, setValue, getValues, trigger } = useForm({
@@ -174,10 +179,96 @@ const Register = () => {
         return true;
     };
 
+    const handleSendOTP = async () => {
+        const { fullName, email } = getValues();
+        setVerifyingOtp(true);
+        try {
+            await sendOTP({ name: fullName, email });
+            setOtpSent(true);
+            Swal.fire({
+                icon: 'success',
+                title: 'OTP Sent',
+                text: 'Please check your email for the verification code.',
+                toast: true,
+                position: 'top-end',
+                timer: 3000,
+                showConfirmButton: false,
+                background: '#1a1a1a',
+                color: '#fff'
+            });
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Failed to send OTP',
+                text: error.message,
+                confirmButtonColor: '#00f3ff',
+                background: '#1a1a1a',
+                color: '#fff'
+            });
+        } finally {
+            setVerifyingOtp(false);
+        }
+    };
+
+    const handleVerifyOTP = async () => {
+        if (!otpValue || otpValue.length !== 6) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Invalid OTP',
+                text: 'Please enter a 6-digit code.',
+                toast: true,
+                position: 'top-end',
+                timer: 2000,
+                showConfirmButton: false
+            });
+            return;
+        }
+
+        setVerifyingOtp(true);
+        try {
+            const { email } = getValues();
+            const result = await verifyOTP({ email, otp: otpValue });
+            setVerificationToken(result.verification_token);
+            setIsOtpVerified(true);
+            setOtpSent(false);
+            setCurrentStep(2);
+            Swal.fire({
+                icon: 'success',
+                title: 'Email Verified',
+                text: 'You can now proceed with registration.',
+                toast: true,
+                position: 'top-end',
+                timer: 2000,
+                showConfirmButton: false,
+                background: '#1a1a1a',
+                color: '#fff'
+            });
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Verification Failed',
+                text: error.message,
+                confirmButtonColor: '#00f3ff',
+                background: '#1a1a1a',
+                color: '#fff'
+            });
+        } finally {
+            setVerifyingOtp(false);
+        }
+    };
+
     const nextStep = async () => {
         let fieldsValidate = [];
         if (currentStep === 1) fieldsValidate = ['fullName', 'email', 'gender', 'mobile'];
         if (currentStep === 2) fieldsValidate = ['college', 'department', 'year'];
+
+        const isValid = await trigger(fieldsValidate);
+        if (!isValid) return;
+
+        if (currentStep === 1 && !isOtpVerified) {
+            handleSendOTP();
+            return;
+        }
 
         if (currentStep === 3) {
             if (validateStep3()) {
@@ -186,8 +277,7 @@ const Register = () => {
             return;
         }
 
-        const isValid = await trigger(fieldsValidate);
-        if (isValid) setCurrentStep(prev => prev + 1);
+        setCurrentStep(prev => prev + 1);
     };
 
     const prevStep = () => setCurrentStep(prev => prev - 1);
@@ -206,7 +296,8 @@ const Register = () => {
                 city: data.city || '',
                 state: data.state || '',
                 workshop_selections: data.workshop_selections,
-                event_selections: data.event_selections
+                event_selections: data.event_selections,
+                verification_token: verificationToken
             };
 
             const result = await submitRegistration(payload);
@@ -416,20 +507,70 @@ const Register = () => {
                             <AnimatePresence mode="wait">
                                 {currentStep === 1 && (
                                     <motion.div key="step1" initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -20, opacity: 0 }} className="space-y-6">
-                                        <Input label="Full Name" name="fullName" register={register} error={errors.fullName} placeholder="Enter your Name" />
+                                        <Input label="Full Name" name="fullName" register={register} error={errors.fullName} placeholder="Enter your Name" disabled={isOtpVerified} />
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                            <Input label="Email Address" name="email" type="email" register={register} error={errors.email} placeholder="Enter your Email Id" />
-                                            <Select label="Gender" name="gender" register={register} error={errors.gender} options={['Male', 'Female', 'Other']} />
+                                            <Input label="Email Address" name="email" type="email" register={register} error={errors.email} placeholder="Enter your Email Id" disabled={isOtpVerified} />
+                                            <Select label="Gender" name="gender" register={register} error={errors.gender} options={['Male', 'Female', 'Other']} disabled={isOtpVerified} />
                                         </div>
-                                        <Input label="Mobile Number" name="mobile" type="tel" register={register} error={errors.mobile} placeholder="Mobile Number" />
+                                        <Input label="Mobile Number" name="mobile" type="tel" register={register} error={errors.mobile} placeholder="Mobile Number" disabled={isOtpVerified} />
+
+                                        {isOtpVerified && (
+                                            <div className="flex items-center gap-2 text-green-400 font-bold font-orbitron text-xs uppercase tracking-widest bg-green-400/10 p-3 rounded-lg border border-green-400/20">
+                                                <Check size={16} /> Email Verified Successfully
+                                            </div>
+                                        )}
                                     </motion.div>
+                                )}
+
+                                {otpSent && (
+                                    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+                                        <motion.div
+                                            initial={{ scale: 0.9, opacity: 0 }}
+                                            animate={{ scale: 1, opacity: 1 }}
+                                            className="bg-[#0a0a0a] border border-white/10 p-8 rounded-2xl max-w-sm w-full space-y-6 shadow-[0_0_50px_rgba(0,243,255,0.1)]"
+                                        >
+                                            <div className="text-center">
+                                                <Shield className="text-neon-cyan mx-auto mb-4" size={48} />
+                                                <h3 className="text-xl font-bold font-orbitron text-white uppercase tracking-widest">Verify Email</h3>
+                                                <p className="text-gray-400 text-sm mt-2">Enter the 6-digit code sent to your email.</p>
+                                            </div>
+
+                                            <div className="space-y-4">
+                                                <input
+                                                    type="text"
+                                                    maxLength={6}
+                                                    value={otpValue}
+                                                    onChange={(e) => setOtpValue(e.target.value.replace(/\D/g, ''))}
+                                                    placeholder="000000"
+                                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-center text-3xl font-black tracking-[0.5em] text-neon-cyan focus:border-neon-cyan focus:outline-none transition-all font-mono"
+                                                />
+
+                                                <button
+                                                    type="button"
+                                                    onClick={handleVerifyOTP}
+                                                    disabled={verifyingOtp || otpValue.length !== 6}
+                                                    className="w-full py-4 bg-neon-cyan text-black font-bold font-orbitron uppercase tracking-widest hover:shadow-[0_0_20px_#00f3ff] transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                                                >
+                                                    {verifyingOtp ? <Loader2 className="animate-spin" /> : 'Verify Code'}
+                                                </button>
+
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setOtpSent(false)}
+                                                    className="w-full text-gray-500 hover:text-white text-xs font-orbitron uppercase tracking-widest transition-colors py-2"
+                                                >
+                                                    Cancel
+                                                </button>
+                                            </div>
+                                        </motion.div>
+                                    </div>
                                 )}
 
                                 {currentStep === 2 && (
                                     <motion.div key="step2" initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -20, opacity: 0 }} className="space-y-6">
-                                        <Input label="College Name" name="college" register={register} error={errors.college}placeholder="Enter your College Name" />
+                                        <Input label="College Name" name="college" register={register} error={errors.college} placeholder="Enter your College Name" />
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                            <Input label="Department" name="department" register={register} error={errors.department}placeholder="Enter your Department EX: CSE, ECE, IT" />
+                                            <Input label="Department" name="department" register={register} error={errors.department} placeholder="Enter your Department EX: CSE, ECE, IT" />
                                             <Select label="Year of Study" name="year" register={register} error={errors.year} options={['1', '2', '3',]} />
                                         </div>
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -689,25 +830,27 @@ const Register = () => {
     );
 };
 
-const Input = ({ label, name, type = "text", register, error, placeholder }) => (
+const Input = ({ label, name, type = "text", register, error, placeholder, disabled = false }) => (
     <div className="flex flex-col gap-2">
         <label className="text-gray-400 text-xs font-orbitron uppercase tracking-widest">{label}</label>
         <input
             type={type}
             {...register(name)}
             placeholder={placeholder}
-            className={`bg-black/40 border ${error ? 'border-red-500' : 'border-white/10'} rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neon-cyan transition-colors text-sm`}
+            disabled={disabled}
+            className={`bg-black/40 border ${error ? 'border-red-500' : 'border-white/10'} rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neon-cyan transition-colors text-sm ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
         />
         {error && <span className="text-red-500 text-[10px] font-bold uppercase">{error.message}</span>}
     </div>
 );
 
-const Select = ({ label, name, register, error, options }) => (
+const Select = ({ label, name, register, error, options, disabled = false }) => (
     <div className="flex flex-col gap-2">
         <label className="text-gray-400 text-xs font-orbitron uppercase tracking-widest">{label}</label>
         <select
             {...register(name)}
-            className={`bg-black/40 border ${error ? 'border-red-500' : 'border-white/10'} rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neon-cyan transition-colors text-sm appearance-none outline-none`}
+            disabled={disabled}
+            className={`bg-black/40 border ${error ? 'border-red-500' : 'border-white/10'} rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neon-cyan transition-colors text-sm appearance-none outline-none ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
         >
             <option value="" className="bg-[#090011] text-gray-500">Select...</option>
             {options.map(opt => (
