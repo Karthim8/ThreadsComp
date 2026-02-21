@@ -1,9 +1,9 @@
-const API_BASE = 'https://threads26-2-fdem.onrender.com/api'; // Production (Render)
+const API_BASE = 'https://threads26-2-fdem.onrender.com'; // Production (Render)
 // const API_BASE = 'http://localhost:3000/api'; // Local dev
 
 const delay = (ms) => new Promise(res => setTimeout(res, ms));
 
-const API_KEY = import.meta.env.VITE_API_KEY || ''; // Key is now strictly in .env / Production Env Vars
+const API_KEY = import.meta.env.VITE_API_KEY || 'threads-v1-secret-2026';
 
 export const fetchAPI = async (endpoint, options = {}, retries = 5) => {
     try {
