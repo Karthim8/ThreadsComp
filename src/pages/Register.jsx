@@ -711,7 +711,12 @@ const Register = () => {
                                             <div className="text-center">
                                                 <Shield className="text-neon-cyan mx-auto mb-4" size={48} />
                                                 <h3 className="text-xl font-bold font-orbitron text-white uppercase tracking-widest">Verify Email</h3>
-                                                <p className="text-gray-400 text-sm mt-2">Enter the 6-digit code sent to your email.</p>
+                                                <p className="text-gray-400 text-sm font-orbitron">
+                                                    Enter the 6-digit code sent to your email.
+                                                </p>
+                                                <p className="text-yellow-400/80 text-xs font-orbitron mt-1">
+                                                    ⚠️ Can't find it? Check your <span className="font-bold text-yellow-400">spam or junk</span> folder.
+                                                </p>
                                             </div>
 
                                             <div className="space-y-4">

@@ -193,7 +193,7 @@ const CSERegister = () => {
                 Swal.fire({
                     icon: 'success',
                     title: 'OTP Sent',
-                    text: `Verification code sent to ${data.email}`,
+                    html: `Verification code sent to <strong>${data.email}</strong><br/><span style="font-size:12px;color:#facc15;">⚠️ Can't find it? Check your <strong>spam or junk</strong> folder too.</span>`,
                     background: '#1a1a1a',
                     color: '#fff'
                 });
@@ -774,7 +774,7 @@ const CSERegister = () => {
                                                     <option value="1" className="bg-black">First Year</option>
                                                     <option value="2" className="bg-black">Second Year</option>
                                                     <option value="3" className="bg-black">Third Year</option>
-                                                    <option value="4" className="bg-black">Fourth Year</option>
+
                                                 </select>
                                                 <Grid className="absolute left-4 top-3.5 text-gray-500 w-5 h-5" />
                                             </div>
