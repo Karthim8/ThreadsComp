@@ -42,7 +42,7 @@ const TEAM_MEMBERS = [
         role: "LEAD CO-ORDINATOR",
         dept: "CSE",
         status: "ACTIVE",
-        org: "WEB TEAM LEAD",
+        org: "THREADS'26",
         phone: "+91 9360757400",
         image: "/teampics/Kreeshab Leading Co-ordinator.jpeg",
         linkedin: "kreeshab"
