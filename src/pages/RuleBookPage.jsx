@@ -174,7 +174,7 @@ const SECTIONS = [
         id: 'trailwar',
         tag: 'T-07',
         color: '#FF2A6D',
-        title: 'TRAILAND WAR',
+        title: 'TRAIL AND WAR',
         subtitle: 'RULES AND REGULATIONS : (By DEXTER’S CLUB )',
         organizers: ['Arnold Philip', 'Dharunkumar S', 'Deepak P', 'DeepakKumar K M'],
         content: [

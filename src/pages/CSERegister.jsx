@@ -1420,6 +1420,33 @@ const CSERegister = () => {
             return;
         }
 
+        // --- NEW VALIDATION FOR FIRST YEAR STUDENTS ---
+    if (formData.year_of_study === '1') {
+        const admissionNumber = formData.roll_number.trim().toUpperCase();
+        if (admissionNumber.length !== 10) {
+            setErrors(prev => ({ ...prev, roll_number: 'Admission number must be exactly 10 characters' }));
+            Swal.fire({
+                icon: 'warning',
+                title: 'Invalid Admission Number',
+                text: 'First year admission number must be exactly 10 characters long.',
+                background: '#1a1a1a',
+                color: '#fff'
+            });
+            return;
+        }
+        if (!/[A-Z]/.test(admissionNumber)) {
+            setErrors(prev => ({ ...prev, roll_number: 'Admission number must contain at least one letter' }));
+            Swal.fire({
+                icon: 'warning',
+                title: 'Invalid Admission Number',
+                text: 'First year admission number must contain at least one alphabet.',
+                background: '#1a1a1a',
+                color: '#fff'
+            });
+            return;
+        }
+    }
+
         setVerifying(true);
         try {
             const data = await sendSonacseOTP({
@@ -2238,7 +2265,10 @@ const CSERegister = () => {
                             </div>
 
                             {/* Events */}
-                            <div>
+                            {formData.year_of_study !== '1' && (
+  <h5>Event registration will be available on the spot.</h5>
+)}
+                            <div style={{display: formData.year_of_study === '1' ? 'block' : 'none'}}>
                                 <h4 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
                                     <Shield className="text-neon-green" />
                                     Events {formData.year_of_study === '1' ? '(₹250 for all events)' : '(Free for SONACSE)'}
