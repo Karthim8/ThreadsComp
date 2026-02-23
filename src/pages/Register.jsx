@@ -142,6 +142,10 @@ const Register = () => {
     };
 
     useEffect(() => {
+        if (localStorage.getItem('threads26_participant_id')) {
+            navigate('/portal');
+            return;
+        }
         fetchEvents();
     }, []);
 
@@ -614,7 +618,13 @@ const Register = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
                 {/* General Registration Card */}
                 <div
-                    onClick={() => setShowForm(true)}
+                    onClick={() => {
+                        if (localStorage.getItem('threads26_participant_id')) {
+                            navigate('/portal');
+                        } else {
+                            setShowForm(true);
+                        }
+                    }}
                     className="group relative h-64 md:h-80 bg-black/40 border border-white/10 rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:border-neon-cyan hover:shadow-[0_0_30px_rgba(0,243,255,0.3)] hover:-translate-y-2 flex flex-col items-center justify-center gap-6"
                 >
                     <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -629,7 +639,13 @@ const Register = () => {
 
                 {/* Sona CSE Registration Card */}
                 <div
-                    onClick={() => navigate('/register/cse')}
+                    onClick={() => {
+                        if (localStorage.getItem('threads26_participant_id')) {
+                            navigate('/portal');
+                        } else {
+                            navigate('/register/cse');
+                        }
+                    }}
                     className="group relative h-64 md:h-80 bg-black/40 border border-white/10 rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:border-neon-purple hover:shadow-[0_0_30px_rgba(188,19,254,0.3)] hover:-translate-y-2 flex flex-col items-center justify-center gap-6"
                 >
                     <div className="absolute inset-0 bg-gradient-to-br from-neon-purple/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
