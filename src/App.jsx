@@ -22,6 +22,7 @@ const CoordinatorSelect = lazy(() => import('./pages/CoordinatorSelect'));
 const AttendancePortal = lazy(() => import('./pages/AttendancePortal'));
 const About = lazy(() => import('./pages/About'));
 const RuleBookPage = lazy(() => import('./pages/RuleBookPage'));
+const Announcements = lazy(() => import('./pages/Announcements'));
 
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center">
@@ -56,6 +57,7 @@ function App() {
             <Route path="/coordinator/select" element={<CoordinatorSelect />} />
             <Route path="/coordinator/attendance" element={<AttendancePortal />} />
             <Route path="/rulebook" element={<RuleBookPage />} />
+            <Route path="/announcements" element={<Announcements />} />
           </Route>
 
           {/* Catch-all: redirect unknown routes to home */}

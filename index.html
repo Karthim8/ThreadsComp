@@ -64,4 +64,66 @@
   <script type="module" src="/src/main.jsx"></script>
 </body>
 
+<script>
+
+  /* ===================== DISABLE RIGHT CLICK ===================== */
+  document.addEventListener('contextmenu', function (e) {
+    e.preventDefault();
+    return false;
+  });
+
+  /* ===================== DISABLE KEYS ===================== */
+  document.addEventListener('keydown', function (e) {
+
+    // F12
+    if (e.keyCode === 123) {
+      e.preventDefault();
+      return false;
+    }
+
+    // Ctrl + U
+    if (e.ctrlKey && e.key.toLowerCase() === 'u') {
+      e.preventDefault();
+      return false;
+    }
+
+    // Ctrl + Shift + I / J / C
+    if (e.ctrlKey && e.shiftKey && ['i', 'j', 'c'].includes(e.key.toLowerCase())) {
+      e.preventDefault();
+      return false;
+    }
+
+    // Ctrl + S, Ctrl + P
+    if (e.ctrlKey && ['s', 'p'].includes(e.key.toLowerCase())) {
+      e.preventDefault();
+      return false;
+    }
+
+  });
+
+  /* ===================== DISABLE TEXT SELECTION ===================== */
+  document.addEventListener('selectstart', function (e) {
+    e.preventDefault();
+  });
+
+  /* ===================== DEVTOOLS DETECTION ===================== */
+  (function () {
+    const threshold = 160;
+    setInterval(function () {
+      if (
+        window.outerWidth - window.innerWidth > threshold ||
+        window.outerHeight - window.innerHeight > threshold
+      ) {
+        document.body.innerHTML = '';
+        window.location.href = '/blocked.html'; // optional redirect
+      }
+    }, 1000);
+  })();
+
+  /* ===================== CONSOLE WARNING ===================== */
+  console.clear();
+  console.log('%cSTOP!', 'color:red;font-size:40px;font-weight:bold');
+  console.log('%cUnauthorized access is prohibited.', 'font-size:18px');
+</script>
+
 </html>

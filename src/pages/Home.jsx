@@ -3,6 +3,7 @@ import CountdownTimer from '../components/CountdownTimer';
 import { motion, AnimatePresence, useInView, animate } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Calendar, MapPin, ArrowRight, Clock, Award, Users, Cpu, Zap, Code, Shield, BookOpen, FileText, Download, ChevronLeft, ChevronRight } from 'lucide-react';
+import Swal from 'sweetalert2';
 
 const FEATURES = [
     {
@@ -23,6 +24,70 @@ const FEATURES = [
 ];
 
 const Home = () => {
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            Swal.fire({
+                title: `
+                    <div class="flex flex-col items-center gap-1 font-orbitron mb-2">
+                        <span class="text-[9px] text-neon-cyan/60 font-black tracking-[0.4em] uppercase">Security Clearance</span>
+                        <h2 class="text-xl font-black text-white tracking-widest uppercase">
+                            EVENT <span class="text-neon-cyan text-glow">NOTICE</span>
+                        </h2>
+                    </div>
+                `,
+                html: `
+                    <div class="flex flex-row gap-4 font-orbitron px-4 py-2">
+                        <!-- Logistics Block -->
+                        <div class="flex-1 p-[1px] rounded-xl bg-neon-green/30 border border-neon-green/20">
+                             <div class="bg-black/80 p-4 rounded-xl flex flex-col items-center text-center gap-2 h-full">
+                                <div class="bg-neon-green/10 rounded-full p-2 border border-neon-green/20 shrink-0 shadow-[0_0_10px_rgba(0,255,157,0.1)]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00ff9d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="animate-pulse"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <p class="text-neon-green text-[9px] font-black tracking-widest mb-1">FOOD & SNACKS</p>
+                                    <p class="text-white text-[10px] font-bold uppercase tracking-wide leading-tight px-1">
+                                        FEE INCLUDES <br/><span class="text-neon-green">LUNCH & SNACKS</span>
+                                    </p>
+                                </div>
+                             </div>
+                        </div>
+
+                        <!-- Advisory Block -->
+                        <div class="flex-1 p-[1px] rounded-xl bg-red-500/30 border border-red-500/20">
+                             <div class="bg-black/80 p-4 rounded-xl flex flex-col items-center text-center gap-2 h-full">
+                                <div class="bg-red-500/10 rounded-full p-2 border border-red-500/20 shrink-0 shadow-[0_0_10px_rgba(239,68,68,0.1)]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <p class="text-red-500 text-[9px] font-black tracking-widest mb-1 uppercase">ADVISORY</p>
+                                    <p class="text-white text-[10px] font-bold uppercase tracking-wide leading-tight">
+                                        <span class="text-red-400">NO ACCOMMODATION</span><br/>PROVIDED
+                                    </p>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                `,
+                background: '#0a0a0a',
+                padding: '2rem',
+                showConfirmButton: true,
+                confirmButtonText: 'ACKNOWLEDGE',
+                confirmButtonColor: '#00f3ff',
+                customClass: {
+                    container: 'backdrop-blur-sm bg-black/60',
+                    popup: 'border border-white/10 rounded-[2rem] !w-[480px] shadow-[0_0_50px_rgba(0,0,0,1)]',
+                    title: 'p-0',
+                    htmlContainer: 'p-0 m-0',
+                    confirmButton: 'mt-2 font-orbitron font-black text-black px-12 py-3 rounded-lg !bg-neon-cyan hover:!bg-white transition-all duration-300 tracking-[0.2em] text-[10px] shadow-[0_0_20px_rgba(0,243,255,0.3)]'
+                },
+                buttonsStyling: false,
+                allowOutsideClick: false,
+                allowEscapeKey: false
+            });
+        }, 1200);
+        return () => clearTimeout(timer);
+    }, []);
+
 
     return (
         <div className="relative w-full">

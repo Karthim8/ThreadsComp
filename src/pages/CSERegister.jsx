@@ -2218,6 +2218,14 @@ const CSERegister = () => {
                                 <Calendar className="text-neon-cyan" /> Event Selection
                             </h3>
 
+                            {/* Refreshments Info */}
+                            <div className="bg-amber-400/10 border border-amber-400/30 p-4 rounded-xl flex items-center gap-3">
+                                <Info size={20} className="text-amber-400 shrink-0" />
+                                <p className="text-amber-200 text-sm font-bold font-orbitron uppercase tracking-wider">
+                                    Registration fee includes lunch. Morning and afternoon refreshments will be provided.
+                                </p>
+                            </div>
+
                             {/* Workshops */}
                             <div className="mb-8">
                                 <h4 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
@@ -2480,6 +2488,11 @@ const CSERegister = () => {
                                 <div className="flex justify-between text-xl font-bold pt-4 text-neon-cyan">
                                     <span>TOTAL FEE</span>
                                     <span className="text-glow">₹{calculateTotal()}</span>
+                                </div>
+                                <div className="pt-2 border-t border-white/5">
+                                    <p className="text-[10px] text-amber-400 uppercase tracking-[0.2em] font-bold text-center">
+                                        Fee includes lunch & refreshments
+                                    </p>
                                 </div>
                             </div>
 

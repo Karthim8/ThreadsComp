@@ -142,9 +142,12 @@ const Success = () => {
                         <p className="text-3xl font-bold font-mono text-neon-cyan tracking-widest drop-shadow-[0_0_10px_rgba(0,243,255,0.5)]">{participantId}</p>
                     </div>
 
-                    <h3 className="text-white font-orbitron font-bold mb-6 flex items-center justify-center gap-2 uppercase tracking-widest text-sm">
+                    <h3 className="text-white font-orbitron font-bold mb-1 flex items-center justify-center gap-2 uppercase tracking-widest text-sm">
                         <CreditCard size={18} className="text-neon-purple" /> PAY REGISTRATION FEE (₹{total})
                     </h3>
+                    <p className="text-[10px] text-amber-400 font-bold font-orbitron uppercase tracking-widest text-center mb-6">
+                        Includes Lunch & Refreshments
+                    </p>
 
                     <div className="flex justify-center mb-6 bg-white p-4 rounded-xl w-max mx-auto shadow-[0_0_30px_rgba(188,19,254,0.1)]">
                         <img src={paymentQr} alt="Payment QR" className="w-[180px] h-[180px]" />

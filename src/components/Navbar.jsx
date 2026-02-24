@@ -45,7 +45,7 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="fixed w-full z-50 top-0 left-0 border-b backdrop-blur-md" style={{ background: 'var(--bg-nav)', borderColor: 'var(--border-normal)' }}>
+            <nav className="fixed w-full z-50 left-0 border-b backdrop-blur-md" style={{ background: 'var(--bg-nav)', borderColor: 'var(--border-normal)', top: 'var(--announcement-offset, 0px)' }}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-20">
                         <Link to="/home" className="text-2xl font-bold font-orbitron tracking-wider text-white flex items-center gap-2 group z-50 relative shrink-0">
@@ -152,8 +152,8 @@ const Navbar = () => {
                                             REGISTER NOW
                                         </Link>
 
-                                       
-                                      </div>
+
+                                    </div>
                                 </div>
                             </motion.div>
                         </>
