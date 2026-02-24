@@ -2031,6 +2031,9 @@ const CSERegister = () => {
                     SONACSE <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-neon-purple">REGISTRATION</span>
                 </h1>
                 <p className="text-center text-gray-400">Exclusive Portal for Department Students</p>
+                <p className="text-xl text-center font-semibold mt-2 text-cyan-500 drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]">
+                    Each individual from the team should register separately, and the team formation can be done on the event day.
+                </p>
             </div>
 
             {/* Main Form Container */}

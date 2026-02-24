@@ -696,6 +696,9 @@ const Register = () => {
                                 ))}
                             </div>
                             <h1 className="text-3xl md:text-4xl font-bold font-orbitron text-center mb-2 uppercase">Step into Thread'S</h1>
+                            <p className="text-xl text-center font-semibold mt-2 text-cyan-500 drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]">
+                                Each individual from the team should register separately, and the team formation can be done on the event day.
+                            </p>
                         </div>
 
                         <form onSubmit={handleSubmit(onSubmit)} className="bg-white/5 border border-white/10 p-8 rounded-2xl relative overflow-hidden backdrop-blur-md">
