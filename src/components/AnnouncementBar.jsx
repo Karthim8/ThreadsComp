@@ -10,7 +10,12 @@ const AnnouncementBar = () => {
     const [isVisible, setIsVisible] = useState(true);
     const navigate = useNavigate();
 
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
     useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth < 768);
+        window.addEventListener('resize', handleResize);
+
         const fetchAnnouncements = async () => {
             try {
                 const data = await fetchAPI('/announcements');
@@ -30,6 +35,7 @@ const AnnouncementBar = () => {
         };
 
         fetchAnnouncements();
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     if (loading || announcements.length === 0 || !isVisible) return null;
@@ -64,7 +70,7 @@ const AnnouncementBar = () => {
                         className="flex whitespace-nowrap items-center"
                         animate={{ x: [0, -50 + '%'] }}
                         transition={{
-                            duration: Math.max(15, combinedText.length * 0.15),
+                            duration: Math.max(10, combinedText.length * (isMobile ? 0.08 : 0.12)),
                             repeat: Infinity,
                             ease: "linear"
                         }}
