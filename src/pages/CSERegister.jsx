@@ -1548,17 +1548,17 @@ const CSERegister = () => {
 
     const validateStep2 = () => {
         // For second/third year students, events must be empty
-        if (formData.year_of_study !== '1' && formData.event_selections.length > 0) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Invalid Selection',
-                text: 'Second and third year students cannot register for events.',
-                confirmButtonColor: '#a855f7',
-                background: '#1a1a1a',
-                color: '#fff'
-            });
-            return false;
-        }
+        // if (formData.year_of_study !== '1' && formData.event_selections.length > 0) {
+        //     Swal.fire({
+        //         icon: 'warning',
+        //         title: 'Invalid Selection',
+        //         text: 'Second and third year students cannot register for events.',
+        //         confirmButtonColor: '#a855f7',
+        //         background: '#1a1a1a',
+        //         color: '#fff'
+        //     });
+        //     return false;
+        // }
 
         // Check if user has selected any non-technical events without technical events
         const hasTechnicalSelected = formData.event_selections.some(id => {
@@ -1617,21 +1617,21 @@ const CSERegister = () => {
         const fieldName = type === 'workshop' ? 'workshop_selections' : 'event_selections';
 
         // For event checkboxes, only first-year students are allowed
-        if (type === 'event' && formData.year_of_study !== '1') {
-            Swal.fire({
-                icon: 'info',
-                title: 'Events Not Available',
-                text: 'Only first-year students can register for the events. Second-year and third-year students can register on the spot for events (Both Technical and Non Technical)',
-                confirmButtonColor: '#a855f7',
-                background: '#1a1a1a',
-                color: '#fff',
-                toast: true,
-                position: 'top-end',
-                timer: 3000,
-                showConfirmButton: false
-            });
-            return; // Don't update state
-        }
+        // if (type === 'event' && formData.year_of_study !== '1') {Event registration will be available on the spot.
+        //     Swal.fire({
+        //         icon: 'info',
+        //         title: 'Events Not Available',
+        //         text: 'Only first-year students can register for the events. Second-year and third-year students can register on the spot for events (Both Technical and Non Technical)',
+        //         confirmButtonColor: '#a855f7',
+        //         background: '#1a1a1a',
+        //         color: '#fff',
+        //         toast: true,
+        //         position: 'top-end',
+        //         timer: 3000,
+        //         showConfirmButton: false
+        //     });
+        //     return; // Don't update state
+        // }
 
         // Find the selected event from the events array
         const selectedEvent = events.find(event => event.event_id.toString() === value.toString());
@@ -2277,10 +2277,10 @@ const CSERegister = () => {
                             </div>
 
                             {/* Events */}
-                            {formData.year_of_study !== '1' && (
+                            {/* {formData.year_of_study !== '1' && (
                                 <h5>Event registration will be available on the spot.</h5>
-                            )}
-                            <div style={{ display: formData.year_of_study === '1' ? 'block' : 'none' }}>
+                            )} */}
+                            <div>
                                 <h4 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
                                     <Shield className="text-neon-green" />
                                     Events {formData.year_of_study === '1' ? '(₹250 for all events)' : '(Free for SONACSE)'}
