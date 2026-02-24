@@ -66,11 +66,11 @@
 
 <script>
 
-  /* ===================== DISABLE RIGHT CLICK ===================== */
-  document.addEventListener('contextmenu', function (e) {
-    e.preventDefault();
-    return false;
-  });
+  /* ===================== DISABLE RIGHT CLICK (OPTIONAL) ===================== */
+  // Comment this if you want right-click enabled
+  // document.addEventListener('contextmenu', function (e) {
+  //   e.preventDefault();
+  // });
 
   /* ===================== DISABLE KEYS ===================== */
   document.addEventListener('keydown', function (e) {
@@ -93,18 +93,14 @@
       return false;
     }
 
-    // Ctrl + S, Ctrl + P
-    if (e.ctrlKey && ['s', 'p'].includes(e.key.toLowerCase())) {
-      e.preventDefault();
-      return false;
-    }
+    // ❌ Removed blocking of Ctrl + S / Ctrl + P
+    // So copy-paste works normally
 
   });
 
-  /* ===================== DISABLE TEXT SELECTION ===================== */
-  document.addEventListener('selectstart', function (e) {
-    e.preventDefault();
-  });
+  /* ===================== ENABLE TEXT SELECTION ===================== */
+  // Removed selectstart block
+  // Users can now select and copy text normally
 
   /* ===================== DEVTOOLS DETECTION ===================== */
   (function () {
@@ -115,7 +111,7 @@
         window.outerHeight - window.innerHeight > threshold
       ) {
         document.body.innerHTML = '';
-        window.location.href = '/blocked.html'; // optional redirect
+        window.location.href = '/blocked.html';
       }
     }, 1000);
   })();
