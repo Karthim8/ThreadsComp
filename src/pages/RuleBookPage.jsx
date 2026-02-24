@@ -13,7 +13,7 @@ const SECTIONS = [
         title: "THREADS'26 RULE BOOK",
         subtitle: 'Department of Computer Science and Engineering',
         content: [
-            { type: 'cover-sub', text: 'B.E. CSE · B.E. CSE(AIML) · B.E. CSD · B.Tech. CSBS · B.E. CSE(SCE)' },
+            { type: 'cover-sub', text: 'B.E. CSE · B.E. CSE(AIML) · B.E. CSD · B.Tech.CBE · B.E. CSE(SCE)' },
             { type: 'cover-year', text: 'March 5–6, 2026 · Sona College of Technology' },
         ],
     },

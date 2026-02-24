@@ -67,7 +67,7 @@ const Home = () => {
 
                         </p>
                         <p className="text-white text-xs sm:text-sm md:text-lg font-orbitron text-center uppercase tracking-[0.1em] opacity-90 mt-1">
-                            (BE. CSE, BE. CSE(AI&ML), BE. CSD, B.TECH(CBE) AND BE.CSE(SEC))
+                            (BE. CSE, BE. CSE(AI&ML), BE. CSD, B.TECH.CBE AND BE.CSE(SEC))
                         </p>
                     </div>
                     <div className="w-40 h-1 bg-gradient-to-r from-transparent via-neon-cyan to-transparent mx-auto mt-8"></div>
