@@ -1843,7 +1843,7 @@ const CSERegister = () => {
                     '<div>' +
                     '<p class="text-[10px] text-amber-400/80 mb-2 italic">(Enter valid transaction id and It will verified soon and displayed on portal page )</p>' +
                     '<p class="text-sm text-gray-400 mb-1">Transaction ID <span class="text-red-500">*</span></p>' +
-                    '<input id="swal-txn-id" class="w-full bg-gray-900 border border-gray-700 rounded p-3 text-white" placeholder="Enter UPI / Transaction ID">' +
+                    '<input id="swal-txn-id" class="w-full bg-gray-900 border border-gray-700 rounded p-3 text-white" placeholder="Transaction ID">' +
                     '<p class="text-xs text-gray-500 mt-1">Min. 5 characters from your payment app</p>' +
                     '</div>' +
                     '</div>',

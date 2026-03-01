@@ -223,7 +223,7 @@ const ParticipantPortal = () => {
                     <div>
                         <p class="text-[10px] text-amber-400/80 mb-2 italic">(Enter valid transaction id and It will verified soon and displayed on portal page )</p>
                         <p class="text-sm text-gray-400 mb-1">Transaction ID <span class="text-red-500">*</span></p>
-                        <input id="swal-txn-id" class="w-full bg-gray-900 border border-gray-700 rounded p-3 text-white focus:outline-none focus:border-neon-cyan" placeholder="Enter UPI / Transaction ID">
+                        <input id="swal-txn-id" class="w-full bg-gray-900 border border-gray-700 rounded p-3 text-white focus:outline-none focus:border-neon-cyan" placeholder="Enter Transaction ID">
                         <p class="text-xs text-gray-500 mt-1">Min. 5 characters from your payment app</p>
                     </div>
 
@@ -907,7 +907,7 @@ const ParticipantPortal = () => {
                                         value={txnId}
                                         onChange={(e) => setTxnId(e.target.value)}
                                         className="w-full bg-black/60 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-neon-cyan transition-all font-mono text-sm placeholder:text-gray-700"
-                                        placeholder="Enter UPI Transaction ID"
+                                        placeholder="EnterTransaction ID"
                                     />
                                     <p className="text-[10px] text-gray-600 mt-2 text-left italic">Enter the 12-digit UTR from your payment app</p>
                                 </div>
